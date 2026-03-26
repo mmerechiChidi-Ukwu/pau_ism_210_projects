@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/mmerechiChidi-Ukwu/pau_ism_210_projects/issues"
   },
-  "homepage": "https://github.com/mmerechiChidi-Ukwu/pau_ism_210_projects#readme"
+  "homepage": "https://github.com/mmerechiChidi-Ukwu/pau_ism_210_projects#readme",
+  "dependencies": {
+    "mongodb": "^7.1.1"
+  }
 }
