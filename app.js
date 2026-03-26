@@ -20,11 +20,24 @@ let status = {}
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+async function connectDB(){
+    try{
+        await mongoose.connect("mongodb+srv://memecu440_db_user:Sample-dample@ism-project.wyrfril.mongodb.net/?appName=ISM-project");
+        console.log("Finally connected to the dang-nam thing...")
+    }
+    catch(err){
+        console.error(`We kinda had an issue connecting to this p; the error is ${err.message}`);
+        process.exit(1);
+    }
+}
+
+connectDB();
+
 const kittySchema = new mongoose.Schema({ name: String });
 const Kitten = mongoose.model('Kitten', kittySchema);
 
 app.get("/api/server/status", async(req, res) => {
-    const body = req.body;
+    const query = req.query;
     console.log(`Received form data:\n${body}`);
     status = {
         statusCode: 201,
@@ -108,13 +121,6 @@ app.delete("/api/kittens/:id", async (req, res) => {
         res.status(500).json({ status: 500, msg: "Failed to delete kitten.", error: err.message });
     }
 });
-
-async function meow(kittenName){
-    await mongoose.connect("mongodb+srv://memecu440_db_user:Sample-dample@ism-project.wyrfril.mongodb.net/?appName=ISM-project");
-    const kitty1 = new Kitten({ name: kittenName })
-    await kitty1.save()
-    console.log(kitty1.name)
-}
 
 app.listen(PORT, () => {
     console.log(`Hello world: server is running on Port ${PORT}.`);
