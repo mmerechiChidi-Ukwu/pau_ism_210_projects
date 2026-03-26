@@ -124,7 +124,6 @@ app.delete("/api/kittens/:id", async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Hello world: server is running on Port ${PORT}.`);
-    meow()
 })
 
 async function postData(url = "", data = {}) {
