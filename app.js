@@ -42,12 +42,12 @@ const Kitten = mongoose.model('Kitten', kittySchema);
 
 app.get("/", async(req, res) => {
     const query = req.query;
-    console.log(`Received form data:\n${body}`);
     status = {
         statusCode: 201,
         msg: "Cat form submission successful!",
         data: "I wanna live WELL!"
     }
+    console.log(`Received form data:\n${body}`);
     res.status(201).json(status);
 });
 
