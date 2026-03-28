@@ -140,8 +140,3 @@ app.delete("/api/kittens/:id", async (req, res) => {
         res.status(500).json({ status: 500, msg: "Failed to delete kitten.", error: err.message });
     }
 });
-
-postData("http://localhost:3000/api/submit-form/login",
-    {username: "AfamO", password: "mew!£qwe12"}).then((data) => {
-        console.log(data);
-    });
