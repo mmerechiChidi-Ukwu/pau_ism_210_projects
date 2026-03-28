@@ -45,9 +45,9 @@ app.get("/", async(req, res) => {
     status = {
         statusCode: 201,
         msg: "Cat form submission successful!",
-        data: "I wanna live WELL!"
+        data: kittySchema
     }
-    console.log(`Received form data:\n${body}`);
+    console.log(`Received form data:\n${kittySchema}`);
     res.status(201).json(status);
 });
 
@@ -61,7 +61,7 @@ app.post("/api/submit-form/login", async(req, res) =>{
 
 app.post("/api/kittens", async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name } = req.kittySchema;
         if (!name) {
             return res.status(400).json({ status: 400, msg: "Kitten name is required." });
         }
@@ -96,7 +96,7 @@ app.get("/api/kittens/:id", async (req, res) => {
 
 app.put("/api/kittens/:id", async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name } = req.kittySchema;
         if (!name) {
             return res.status(400).json({ status: 400, msg: "Kitten name is required." });
         }
