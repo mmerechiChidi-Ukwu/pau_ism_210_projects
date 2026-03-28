@@ -41,28 +41,42 @@ const kittySchema = new mongoose.Schema({ name: String });
 const Kitten = mongoose.model('Kitten', kittySchema);
 
 app.get("/", async(req, res) => {
-    const query = req.query;
+    const body = await(req.body);
     status = {
         statusCode: 201,
         msg: "Cat form submission successful!",
         data: kittySchema
     }
     res.send("Hi: this is a simple kitty API.")
-    console.log(`Received form data:\n${kittySchema}`);
+    console.log(`Received form data:\n${body}`);
     res.status(201).json(status);
 });
 
 app.post("/api/submit-form/login", async(req, res) =>{
+    await function postData(url = "", data = {username, password}) {
+    const response = fetch(url, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
     const responseBody = {
         status: 200,
-        msg: "Login successful!"
+        msg: "Sign up successful!"
     }
     res.status(200).json(responseBody);
 })
 
 app.post("/api/kittens", async (req, res) => {
     try {
-        const { name } = req.kittySchema;
+        const { name } = await(req.kittySchema);
         if (!name) {
             return res.status(400).json({ status: 400, msg: "Kitten name is required." });
         }
@@ -127,20 +141,6 @@ app.delete("/api/kittens/:id", async (req, res) => {
     }
 });
 
-async function postData(url = "", data = {}) {
-    const response = await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data)
-    });
-    return response.json();
-}
 postData("http://localhost:3000/api/submit-form/login",
     {username: "AfamO", password: "mew!£qwe12"}).then((data) => {
         console.log(data);
