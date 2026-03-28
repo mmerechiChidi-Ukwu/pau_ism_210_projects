@@ -47,6 +47,7 @@ app.get("/", async(req, res) => {
         msg: "Cat form submission successful!",
         data: kittySchema
     }
+    res.send("Hi: this is a simple kitty API.")
     console.log(`Received form data:\n${kittySchema}`);
     res.status(201).json(status);
 });
