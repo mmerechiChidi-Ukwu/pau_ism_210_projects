@@ -40,7 +40,7 @@ app.listen(PORT, () => {
 const kittySchema = new mongoose.Schema({ name: String });
 const Kitten = mongoose.model('Kitten', kittySchema);
 
-app.get("/api/server/status", async(req, res) => {
+app.get("/", async(req, res) => {
     const query = req.query;
     console.log(`Received form data:\n${body}`);
     status = {
