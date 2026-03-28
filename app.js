@@ -33,6 +33,10 @@ async function connectDB(){
 
 connectDB();
 
+app.listen(PORT, () => {
+    console.log(`Hello world: server is running on Port ${PORT}.`);
+})
+
 const kittySchema = new mongoose.Schema({ name: String });
 const Kitten = mongoose.model('Kitten', kittySchema);
 
@@ -121,10 +125,6 @@ app.delete("/api/kittens/:id", async (req, res) => {
         res.status(500).json({ status: 500, msg: "Failed to delete kitten.", error: err.message });
     }
 });
-
-app.listen(PORT, () => {
-    console.log(`Hello world: server is running on Port ${PORT}.`);
-})
 
 async function postData(url = "", data = {}) {
     const response = await fetch(url, {
